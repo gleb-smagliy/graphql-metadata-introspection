@@ -1,11 +1,7 @@
-import {
-  DocumentNode,
-  Source,
-  GraphQLScalarType
-} from "graphql";
+import { DocumentNode, Source } from "graphql";
 import { FIELDS_DIRECTIVES_QUERY_NAME, TYPES_DIRECTIVES_QUERY_NAME } from './directives-schema';
 
-interface IDirectiveDefinition
+export interface IDirectiveDefinition
 {
   name: string
   arguments: Array<object>

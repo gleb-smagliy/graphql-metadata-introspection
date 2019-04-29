@@ -20,5 +20,18 @@
   "bugs": {
     "url": "https://github.com/gleb-smagliy/graphql-metadata-introspection/issues"
   },
-  "homepage": "https://github.com/gleb-smagliy/graphql-metadata-introspection#readme"
+  "homepage": "https://github.com/gleb-smagliy/graphql-metadata-introspection#readme",
+  "devDependencies": {
+    "@types/graphql": "^14.2.0",
+    "@types/jest": "^24.0.12",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
+  },
+  "peerDependencies": {
+    "graphql": "^0.12.0 || ^0.13.0 || ^14.0.0"
+  },
+  "dependencies": {
+    "graphql-tag": "^2.10.1"
+  }
 }

@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-lambda';
+import gql from 'graphql-tag';
 
 export const FIELDS_DIRECTIVES_QUERY_NAME = '_fieldsDirectives';
 export const TYPES_DIRECTIVES_QUERY_NAME = '_typesDirectives';

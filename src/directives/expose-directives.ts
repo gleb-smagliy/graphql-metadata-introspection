@@ -9,7 +9,6 @@ import {
   GraphQLSchema,
   ArgumentNode
 } from 'graphql';
-
 import {
   ITypeDirectiveDefinition,
   IFieldDirectiveDefinition,
@@ -17,9 +16,8 @@ import {
   IDirectivesQueryResolver,
   ISchemaDefinition
 } from './interfaces';
-
 import { makeExecutableSchema } from 'graphql-tools';
-import { gql } from 'apollo-server-lambda';
+import gql from 'graphql-tag';
 import directivesSchema, { FIELDS_DIRECTIVES_QUERY_NAME, TYPES_DIRECTIVES_QUERY_NAME } from './directives-schema';
 import { mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 const GraphQLJSON = require('graphql-type-json');
@@ -28,30 +26,38 @@ import omitDeep from './omit-deep';
 
 const omitLocation = (input: ArgumentNode) => omitDeep(input, ['loc']);
 
-// const mapArgument = (argument: ArgumentNode): object => omitLocation(argument);
-
 const getFieldDirectives = (
   type: ObjectTypeDefinitionNode,
   field: FieldDefinitionNode
 ): IFieldDirectiveDefinition[] =>
 {
+  if (!field.directives)
+  {
+    return [];
+  }
+
   return field.directives
     .map(directive => (
       {
         typeName: type.name.value,
         fieldName: field.name.value,
         name: directive.name.value,
-        arguments: directive.arguments.map(omitLocation)
+        arguments: directive.arguments ? directive.arguments.map(omitLocation) : []
       }
     ));
 };
 
 function getTypeDirectives(type: ObjectTypeDefinitionNode): Array<ITypeDirectiveDefinition>
 {
+    if (!type.directives)
+    {
+        return [];
+    }
+
   return type.directives.map(directive => ({
     typeName: type.name.value,
     name: directive.name.value,
-    arguments: directive.arguments.map(omitLocation)
+    arguments: directive.arguments ? directive.arguments.map(omitLocation) : []
   }));
 }
 
@@ -61,9 +67,9 @@ function createObjectTypeVisitor(
 ): Visitor<ASTKindToNode>
 {
   return {
-    [Kind.OBJECT_TYPE_DEFINITION](node)
+    [Kind.OBJECT_TYPE_DEFINITION](node: ObjectTypeDefinitionNode)
     {
-      fieldsDirectives.push(...flatMap(node.fields, field => getFieldDirectives(node, field)));
+      fieldsDirectives.push(...flatMap(node.fields, (field: FieldDefinitionNode) => getFieldDirectives(node, field)));
       typesDirectives.push(...getTypeDirectives(node));
     }
   };
