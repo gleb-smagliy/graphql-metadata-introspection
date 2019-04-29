@@ -1,0 +1,24 @@
+{
+  "name": "graphql-metadata-introspection",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gleb-smagliy/graphql-metadata-introspection.git"
+  },
+  "keywords": [
+    "graphql",
+    "directives",
+    "metadata"
+  ],
+  "author": "Gleb Smagliy <glebsmag@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/gleb-smagliy/graphql-metadata-introspection/issues"
+  },
+  "homepage": "https://github.com/gleb-smagliy/graphql-metadata-introspection#readme"
+}

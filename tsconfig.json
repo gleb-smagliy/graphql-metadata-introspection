@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "target": "es5",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "lib": [
+      "es5",
+      "es6",
+      "dom",
+      "es2015",
+      "esnext.asynciterable",
+      "es2017.object",
+      "esnext"
+    ]
+  }
+}
