@@ -4,7 +4,8 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "graphql": "^0.12.0 || ^0.13.0 || ^14.0.0"
   },
   "dependencies": {
-    "graphql-tag": "^2.10.1"
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.4"
   }
 }
