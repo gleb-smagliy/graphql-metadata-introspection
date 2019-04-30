@@ -27,5 +27,10 @@
       "es2017.object",
       "esnext"
     ]
-  }
+  },
+  "exclude": [
+    "__tests__",
+    ".idea",
+    "lib"
+  ]
 }
