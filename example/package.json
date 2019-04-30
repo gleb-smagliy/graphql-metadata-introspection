@@ -1,0 +1,14 @@
+{
+  "name": "graphql-metadata-introspection-example",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "node --preserve-symlinks index.js"
+  },
+  "author": "Gleb Smagliy <glebsmag@gmail.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "graphql-metadata-introspection": "file:..",
+    "apollo-server": "^2.4.8",
+    "graphql": "^14.2.1"
+  }
+}
