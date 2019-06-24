@@ -1,8 +1,8 @@
 export interface MetadataOptions
 {
-    metadataName: string
+  metadataName: string;
 }
 
 export const DEFAULT_METADATA_OPTIONS: MetadataOptions = {
-    metadataName: '_metadata'
+  metadataName: '_metadata',
 };

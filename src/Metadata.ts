@@ -1,7 +1,7 @@
 export interface MetadataArgument
 {
-    name: string,
-    value: string
+  name: string;
+  value: string;
 }
 
 export enum MetadataLocation
@@ -12,9 +12,9 @@ export enum MetadataLocation
 
 export interface Metadata
 {
-    name: string,
-    location: MetadataLocation,
-    typeName: string,
-    fieldName: string,
-    arguments: Array<MetadataArgument>
+  name: string;
+  location: MetadataLocation;
+  typeName: string;
+  fieldName: string;
+  arguments: MetadataArgument[];
 }
