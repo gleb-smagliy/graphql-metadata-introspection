@@ -21,14 +21,16 @@ const schema = makeExecutableSchema({
   },
 });
 
-describe('makeExecutableSchema', () => {
-  it('should', async () => {
-    const result = await execute(schema, gql`
+describe('makeExecutableSchema', () => 
+{
+  it.skip('should expose directive on object field', async () =>
+  {
+    const { data } = await execute(schema, gql`
       {
         me {
           id
         },
-        _metadata {
+        meta: _metadata {
           arguments {
             name
             value
@@ -40,6 +42,15 @@ describe('makeExecutableSchema', () => {
       }
     `);
 
-    console.log('result:', JSON.stringify(result));
+    expect(data).toEqual(expect.anything());
+    // @ts-ignore
+    expect(data.meta).toEqual(expect.anything());
+    // @ts-ignore
+    expect(data.meta).toMatchSnapshot({
+      name: 'ref',
+      typeName: 'User',
+      fieldName: 'id',
+      location: 'OBJECT_FIELD',
+    });
   });
 });

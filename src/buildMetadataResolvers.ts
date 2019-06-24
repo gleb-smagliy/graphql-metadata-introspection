@@ -1,21 +1,17 @@
 import { IResolvers } from 'graphql-tools';
-import { Metadata, MetadataLocation } from './Metadata';
+import { Metadata } from './Metadata';
 import { MetadataOptions } from './MetadataOptions';
 
-export function buildMetadataResolvers({ metadataName }: MetadataOptions): IResolvers<any, any>
+export function buildMetadataResolvers(
+  options: MetadataOptions,
+  // metadata: [Metadata]
+): IResolvers<any, any>
 {
+  const { metadataName } = options;
+
   function metadataResolver(): Metadata[]
   {
-    return [{
-      name: 'ref',
-      location: MetadataLocation.OBJECT_FIELD,
-      typeName: 'Event',
-      fieldName: 'ownerId',
-      arguments: [
-        { name: 'query', value: JSON.stringify('contactById') },
-        { name: 'as', value: JSON.stringify('owner') },
-      ],
-    }];
+    return [];
   }
 
   return {
