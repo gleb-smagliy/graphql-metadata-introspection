@@ -4,14 +4,14 @@ import { MetadataOptions } from './MetadataOptions';
 
 export function buildMetadataResolvers(
   options: MetadataOptions,
-  // metadata: [Metadata]
+  metadata: Metadata[]
 ): IResolvers<any, any>
 {
   const { metadataName } = options;
 
   function metadataResolver(): Metadata[]
   {
-    return [];
+    return metadata;
   }
 
   return {

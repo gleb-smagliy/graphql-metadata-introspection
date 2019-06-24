@@ -2,8 +2,7 @@ import { execute } from 'graphql';
 import gql from 'graphql-tag';
 import { makeExecutableSchema } from '../src';
 
-const schema = makeExecutableSchema({
-  typeDefs: `
+const typeDefs = `
       directive @ref(query: String, as: String) on FIELD_DEFINITION
 
       type User {
@@ -13,17 +12,22 @@ const schema = makeExecutableSchema({
       type Query {
         me: User!
       }
-      `,
-  resolvers: {
-    Query: {
-      me: () => ({ id: 1 }),
-    },
+      `;
+
+const resolvers = {
+  Query: {
+    me: () => ({ id: 1 }),
   },
+};
+
+const schema = makeExecutableSchema(typeDefs, {
+  typeDefs,
+  resolvers,
 });
 
-describe('makeExecutableSchema', () => 
+describe('makeExecutableSchema', () =>
 {
-  it.skip('should expose directive on object field', async () =>
+  it('should expose directive on object field', async () =>
   {
     const { data } = await execute(schema, gql`
       {
@@ -31,6 +35,7 @@ describe('makeExecutableSchema', () =>
           id
         },
         meta: _metadata {
+          name
           arguments {
             name
             value
@@ -44,9 +49,9 @@ describe('makeExecutableSchema', () =>
 
     expect(data).toEqual(expect.anything());
     // @ts-ignore
-    expect(data.meta).toEqual(expect.anything());
+    expect(data.meta[0]).toEqual(expect.anything());
     // @ts-ignore
-    expect(data.meta).toMatchSnapshot({
+    expect(data.meta[0]).toMatchObject({
       name: 'ref',
       typeName: 'User',
       fieldName: 'id',

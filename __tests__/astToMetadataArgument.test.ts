@@ -52,7 +52,7 @@ describe('makeExecutableSchema', () =>
   {
     const { should, input, output } = testCase;
 
-    it(`should ${should}`, () =>
+    it.skip(`should ${should}`, () =>
     {
       const sdl = gql(`type User ${input} { id: ID! }`);
 

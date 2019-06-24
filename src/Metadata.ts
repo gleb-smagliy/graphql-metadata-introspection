@@ -6,8 +6,8 @@ export interface MetadataArgument
 
 export enum MetadataLocation
 {
-    OBJECT_TYPE = 'OBJECT_TYPE ',
-    OBJECT_FIELD = 'OBJECT_FIELD',
+  OBJECT_TYPE = 'OBJECT_TYPE ',
+  OBJECT_FIELD = 'OBJECT_FIELD',
 }
 
 export interface Metadata
@@ -15,6 +15,6 @@ export interface Metadata
   name: string;
   location: MetadataLocation;
   typeName: string;
-  fieldName: string;
+  fieldName: string | null;
   arguments: MetadataArgument[];
 }

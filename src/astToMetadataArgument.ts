@@ -36,7 +36,7 @@ const toArgumentValue = (valueNode: ValueNode): any =>
   }
 };
 
-export const toMetadataArguments = (args: ArgumentNode[]): MetadataArgument[] => {
+export const toMetadataArguments = (args: ReadonlyArray<ArgumentNode>): MetadataArgument[] => {
   if (!args)
   {
     return [];
