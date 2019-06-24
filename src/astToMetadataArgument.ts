@@ -1,7 +1,5 @@
 import { ArgumentNode, ObjectFieldNode, ValueNode } from 'graphql';
-import { MetadataArgument } from "./Metadata";
-// import { ArgumentNode, ObjectFieldNode, ValueNode } from 'graphql';
-// import { MetadataArgument } from './Metadata';
+import { MetadataArgument } from './Metadata';
 
 const toObjectValue = (fields: ReadonlyArray<ObjectFieldNode>): object =>
 {
@@ -21,9 +19,13 @@ const toArgumentValue = (valueNode: ValueNode): any =>
   {
     case 'Variable':
       throw new TypeError('VariableNode is not supported as a directive argument');
+    case 'FloatValue':
+      return parseFloat(valueNode.value);
+    case 'IntValue':
+      return parseInt(valueNode.value, 10);
     case 'StringValue':
     case 'EnumValue':
-    case 'FloatValue':
+    case 'BooleanValue':
       return valueNode.value;
     case 'ObjectValue':
       return toObjectValue(valueNode.fields);
@@ -34,7 +36,7 @@ const toArgumentValue = (valueNode: ValueNode): any =>
   }
 };
 
-export const toMetadataArguments = (args: ArgumentNode[]): MetadataArgument[]=> {
+export const toMetadataArguments = (args: ArgumentNode[]): MetadataArgument[] => {
   if (!args)
   {
     return [];
