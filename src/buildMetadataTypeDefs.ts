@@ -21,7 +21,7 @@ export function buildMetadataTypeDefs({ metadataName }: MetadataOptions): string
             arguments: [MetadataArgument]!
         }
 
-        type Query {
+        extend type Query {
             ${metadataName}: [Metadata!]!
         }
     `;

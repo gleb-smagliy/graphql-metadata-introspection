@@ -1,37 +1,41 @@
-import { GraphQLSchema, parse } from 'graphql';
+import { GraphQLSchema } from 'graphql';
 import {
-    IExecutableSchemaDefinition,
-    makeExecutableSchema as makeGraphqlSchema,
-    mergeSchemas
+  IExecutableSchemaDefinition,
+  makeExecutableSchema as makeGraphqlSchema,
 } from 'graphql-tools';
 import { MetadataOptions, DEFAULT_METADATA_OPTIONS } from './MetadataOptions';
 import { buildMetadataTypeDefs } from './buildMetadataTypeDefs';
 import { buildMetadataResolvers } from './buildMetadataResolvers';
 import { collectMetadata } from './collectMetadata';
+import { definitionsToDocument } from './definitionsToDocument';
+import { mergeResolversToArray } from './mergeResolversToArray';
 
 export function makeExecutableSchema<T = any>(
-    sdl: string,
     schemaDefinition: IExecutableSchemaDefinition<T>,
     options: MetadataOptions = DEFAULT_METADATA_OPTIONS,
 ): GraphQLSchema
 {
-  const { typeDefs, resolvers, parseOptions, ...other } = schemaDefinition;
+  const {
+    typeDefs: originalTypeDefs,
+    resolvers: originalResolvers,
+    ...other
+  } = schemaDefinition;
 
-  // // need to built then print to preserve original makeExecutableSchema capabilities
-  // const schema = buildSchemaFromTypeDefinitions(typeDefs, parseOptions);
-  // const sdl = parse(printSchema(schema));
-  const document = parse(sdl);
+  const externalTypeDefs = Array.isArray(originalTypeDefs) ? originalTypeDefs : [originalTypeDefs];
 
-  const metadata = collectMetadata(document);
+  const schemaDefs = [
+    buildMetadataTypeDefs(options),
+    ...externalTypeDefs
+  ];
 
-  const metadataSchema = makeGraphqlSchema({
-    typeDefs: buildMetadataTypeDefs(options),
-    resolvers: buildMetadataResolvers(options, metadata),
-  });
+  const schemaDocument = definitionsToDocument(schemaDefs);
+  const metadata = collectMetadata(schemaDocument);
 
-  const originalSchema = makeGraphqlSchema({ typeDefs, resolvers, ...other });
+  const metadataResolvers = buildMetadataResolvers(metadata, options);
 
-  return mergeSchemas({
-    schemas: [originalSchema, metadataSchema],
+  return makeGraphqlSchema({
+    typeDefs: schemaDocument,
+    resolvers: mergeResolversToArray(originalResolvers, metadataResolvers),
+    ...other
   });
 }

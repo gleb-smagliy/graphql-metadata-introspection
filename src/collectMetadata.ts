@@ -7,12 +7,8 @@ function visitObjectField(typeName: string, field: FieldDefinitionNode): Metadat
   const directives = field.directives || [];
   const fieldName = field.name.value;
 
-  console.log('visitObjectField: ', typeName, fieldName, JSON.stringify(field));
-
   return directives.map((directive) => {
     const args = directive.arguments || [];
-
-    console.log('visitObjectField directive: ', typeName, fieldName, directive.name.value);
 
     return {
       typeName,
@@ -30,8 +26,6 @@ function visitObjectType(type: ObjectTypeDefinitionNode): Metadata[]
   const typeName = type.name.value;
   const directives = type.directives || [];
 
-  console.log('visitObjectType: ', typeName);
-
   const typeMetadata = directives.map((directive) => {
     const args = directive.arguments || [];
 
@@ -46,21 +40,15 @@ function visitObjectType(type: ObjectTypeDefinitionNode): Metadata[]
 
   const fields = (type.fields || []);
 
-  console.log('fields: ', fields);
-
   const fieldsMetadata = fields
     .reduce((result: Metadata[], field: FieldDefinitionNode) =>
     {
       const fieldResult = visitObjectField(typeName, field);
 
-      console.log('fieldResult:', fieldResult);
-
       result.push(...fieldResult);
 
       return result;
     }, []); // tslint:disable-line: align
-
-  console.log('fieldsMetadata: ', fieldsMetadata);
 
   metadata.push(...typeMetadata);
   metadata.push(...fieldsMetadata);
@@ -83,8 +71,6 @@ function visitDocument(document: DocumentNode): Metadata[]
   };
 
   visit(document, visitor);
-
-  console.log('metadata: ', metadata);
 
   return metadata;
 }

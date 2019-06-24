@@ -3,8 +3,8 @@ import { Metadata } from './Metadata';
 import { MetadataOptions } from './MetadataOptions';
 
 export function buildMetadataResolvers(
+  metadata: Metadata[],
   options: MetadataOptions,
-  metadata: Metadata[]
 ): IResolvers<any, any>
 {
   const { metadataName } = options;
@@ -17,6 +17,6 @@ export function buildMetadataResolvers(
   return {
     Query: {
       [metadataName]: metadataResolver,
-    },
+    }
   };
 }
