@@ -1,5 +1,5 @@
-import {ArgumentNode, ObjectFieldNode, ValueNode} from 'graphql';
-import {MetadataArgument} from "./Metadata";
+import { ArgumentNode, ObjectFieldNode, ValueNode } from 'graphql';
+import { MetadataArgument } from "./Metadata";
 // import { ArgumentNode, ObjectFieldNode, ValueNode } from 'graphql';
 // import { MetadataArgument } from './Metadata';
 

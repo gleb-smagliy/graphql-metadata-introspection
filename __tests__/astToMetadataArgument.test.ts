@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { } from '../src/astToMetadataArgument';
+import { toMetadataArguments } from '../src/astToMetadataArgument';
 
 const testCases = [
   {
@@ -31,9 +31,11 @@ describe('makeExecutableSchema', () =>
 
     it(`should ${should}`, () =>
     {
-      const sdl = gql(`type User ${input} {}`);
+      const sdl = gql(`type User ${input} { id: ID! }`);
 
-      const actual =
+      const directiveArgs = sdl.definitions[0].directives[0].arguments;
+
+      expect(toMetadataArguments(directiveArgs)).toEqual(output);
     });
   }
 });
