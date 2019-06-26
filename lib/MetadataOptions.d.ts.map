@@ -1,1 +1,1 @@
-{"version":3,"file":"MetadataOptions.d.ts","sourceRoot":"","sources":["../src/MetadataOptions.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,eAAe;IAE5B,YAAY,EAAE,MAAM,CAAA;CACvB;AAED,eAAO,MAAM,wBAAwB,EAAE,eAEtC,CAAC"}
+{"version":3,"file":"MetadataOptions.d.ts","sourceRoot":"","sources":["../src/MetadataOptions.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,eAAe;IAE9B,YAAY,EAAE,MAAM,CAAC;CACtB;AAED,eAAO,MAAM,wBAAwB,EAAE,eAEtC,CAAC"}

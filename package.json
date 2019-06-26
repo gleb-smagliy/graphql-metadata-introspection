@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "lint": "tslint -p . -c tslint.json",
-    "build": "tsc"
+    "verify": "npm run lint && npm run test",
+    "compile": "tsc",
+    "build": "npm run verify && npm run compile"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,13 @@
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/gleb-smagliy/graphql-metadata-introspection/issues"
+  },
+  "files": [
+    "lib"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
   },
   "homepage": "https://github.com/gleb-smagliy/graphql-metadata-introspection#readme",
   "devDependencies": {

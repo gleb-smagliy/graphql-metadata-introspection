@@ -10,7 +10,7 @@ export interface Metadata {
     name: string;
     location: MetadataLocation;
     typeName: string;
-    fieldName: string;
-    arguments: Array<MetadataArgument>;
+    fieldName: string | null;
+    arguments: MetadataArgument[];
 }
 //# sourceMappingURL=Metadata.d.ts.map
